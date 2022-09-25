@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 492822}
   - component: {fileID: 21264944}
   - component: {fileID: 9552330}
+  - component: {fileID: 2317186502851432279}
   m_Layer: 0
   m_Name: spaceship_8
   m_TagString: Untagged
@@ -105,3 +106,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2317186502851432279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06097a77bf714144e9b04f9ec439ac99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waveConfigSo: {fileID: 0}
