@@ -1,4 +1,4 @@
-using System.Globalization;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
 
+    private Shooter _shooter;
+
     #region Paddings
     [Header("Paddings")]
     [SerializeField] private float paddingRight;
@@ -20,6 +22,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float paddingTop;
     [SerializeField] private float paddingBottom;
     #endregion
+
+    private void Awake()
+    {
+        _shooter = GetComponent<Shooter>();
+    }
 
     private void Start()
     {
@@ -42,7 +49,6 @@ public class Player : MonoBehaviour
     void OnMove(InputValue value)
     {
         _rawInput = value.Get<Vector2>();
-        Debug.Log(_rawInput);
     }
 
     
@@ -64,6 +70,14 @@ public class Player : MonoBehaviour
 
         _newPos.x = Mathf.Clamp(headedTowardsX, _minBounds.x + paddingRight, _maxBounds.x - paddingLeft);
         _newPos.y = Mathf.Clamp(headedTowardsY, _minBounds.y + paddingBottom, _maxBounds.y - paddingTop);
+    }
+
+    void OnFire(InputValue value)
+    {
+        if (_shooter != null)
+        {
+            _shooter.isFiring = value.isPressed;
+        }
     }
     
 }

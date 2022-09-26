@@ -152,7 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bfdc889bcbe9540aa9070d4baf0d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWave: {fileID: 11400000, guid: 17aa2fc104da9284e9d3b78a987b09a0, type: 2}
+  waveConfigs:
+  - {fileID: 11400000, guid: 17aa2fc104da9284e9d3b78a987b09a0, type: 2}
+  - {fileID: 11400000, guid: 9702feab64a4abf439dfe2773f4453e2, type: 2}
+  - {fileID: 11400000, guid: d1a12e3ce7fd9904c8b560a90582c4bf, type: 2}
+  timeBetweenWaves: 0
 --- !u!4 &299351631
 Transform:
   m_ObjectHideFlags: 0
@@ -336,17 +340,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &7182785226114777110
+--- !u!1001 &1109101077
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1471007895, guid: d92753271b21b6d4eb9650d54da3fefe, type: 3}
-      propertyPath: moveSpeed
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 1012160975904468272, guid: d92753271b21b6d4eb9650d54da3fefe, type: 3}
       propertyPath: m_Name
       value: Player
@@ -357,11 +357,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7971064118227164415, guid: d92753271b21b6d4eb9650d54da3fefe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.02
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 7971064118227164415, guid: d92753271b21b6d4eb9650d54da3fefe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.96
+      value: -6.13
       objectReference: {fileID: 0}
     - target: {fileID: 7971064118227164415, guid: d92753271b21b6d4eb9650d54da3fefe, type: 3}
       propertyPath: m_LocalPosition.z

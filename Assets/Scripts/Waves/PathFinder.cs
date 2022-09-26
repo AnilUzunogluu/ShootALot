@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +6,9 @@ public class PathFinder : MonoBehaviour
     private EnemySpawner _enemySpawner;
     private WaveConfigSO _waveConfigSo;
 
-    private List<Transform> waypoints;
+    private List<Transform> _waypoints;
 
-    private int currentIndex = 0;
+    private int _currentIndex;
 
     private void Awake()
     {
@@ -19,10 +18,9 @@ public class PathFinder : MonoBehaviour
     void Start()
     {
         _waveConfigSo = _enemySpawner.CurrentWave;
-        waypoints = _waveConfigSo.GetWaypoints();
+        _waypoints = _waveConfigSo.GetWaypoints();
     }
 
-    // Update is called once per frame
     void Update()
     {
         FollowPath();
@@ -30,14 +28,14 @@ public class PathFinder : MonoBehaviour
 
     private void FollowPath()
     {
-        if (currentIndex < waypoints.Count)
+        if (_currentIndex < _waypoints.Count)
         {
-            Vector3 targetPos = waypoints[currentIndex].position;
+            Vector3 targetPos = _waypoints[_currentIndex].position;
             float delta = _waveConfigSo.MoveSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, targetPos, delta);
             if (transform.position == targetPos)
             {
-                currentIndex++;
+                _currentIndex++;
             }
         }
         else
