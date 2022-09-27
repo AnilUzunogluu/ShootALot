@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Shooter : MonoBehaviour
 {
@@ -16,7 +18,13 @@ public class Shooter : MonoBehaviour
     [HideInInspector] public bool isFiring;
 
     private Coroutine _firingCoroutine;
-    
+    private AudioManager _audioManager;
+
+    private void Awake()
+    {
+        _audioManager = FindObjectOfType<AudioManager>();
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -49,6 +57,7 @@ public class Shooter : MonoBehaviour
     {
         do
         {
+            _audioManager.PlayShootingSound(useAI);
             GameObject instance = Instantiate(projectile, transform.position, Quaternion.identity);
             instance.GetComponent<Rigidbody2D>().velocity = transform.up * projectileSpeed;
             Destroy(instance, projectileLifeTime);
