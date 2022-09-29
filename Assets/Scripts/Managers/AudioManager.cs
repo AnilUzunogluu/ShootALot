@@ -15,9 +15,26 @@ public class AudioManager : MonoBehaviour
 
     private Vector3 cameraPos;
 
+    private static AudioManager instance;
+
     private void Awake()
     {
+        ManageSingleton();
         if (Camera.main != null) cameraPos = Camera.main.transform.position;
+    }
+
+    private void ManageSingleton()
+    {
+        if (instance != null)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
 

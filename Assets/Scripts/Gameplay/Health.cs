@@ -12,10 +12,13 @@ public class Health : MonoBehaviour
 
     private AudioManager _audioManager;
     private ScoreKeeper _scoreKeeper;
+    private LevelManager _levelManager;
     public event Action OnDestroyed;
+    public event Action OnDamage;
 
     private void Start()
     {
+        _levelManager = FindObjectOfType<LevelManager>();
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
         _audioManager = FindObjectOfType<AudioManager>();
         _cameraShake = FindObjectOfType<CameraShake>();
@@ -35,6 +38,7 @@ public class Health : MonoBehaviour
     private void TakeDamage(float damage)
     {
         health -= damage;
+        OnDamage?.Invoke();
         ShakeCamera();
         CheckDeath();
     }
@@ -56,8 +60,13 @@ public class Health : MonoBehaviour
             if (CompareTag("Enemy"))
             {
                 _scoreKeeper.ModifyScore(scoreValue);
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
+            else
+            {
+               _levelManager.LoadGameOver();
+               Destroy(gameObject);
+            }
         }
     }
 }

@@ -14,6 +14,6 @@ public class VFX : MonoBehaviour
     private void PlayExplosionVFX()
     {
        var instance =  Instantiate(ExplosionVFX, transform.position, quaternion.identity);
-        Destroy(instance.gameObject, 3f);
+       Destroy(instance.gameObject, 3f);
     }
 }
