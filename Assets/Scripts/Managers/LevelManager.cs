@@ -1,20 +1,19 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class LevelManager : MonoBehaviour
 {
+    private static LevelManager instance;
+    
     private const string MAIN_MENU = "Main Menu";
     private const string GAME_OVER = "Game Over";
     private const string GAME = "Game";
 
-    private ScoreKeeper _scoreKeeper;
 
     private void Awake()
     {
-        _scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        instance = this;
     }
 
     public void LoadMainMenu()
@@ -23,12 +22,11 @@ public class LevelManager : MonoBehaviour
     }
     public void LoadGame()
     {
-        _scoreKeeper.ResetScore();
+        ScoreKeeper.ResetScore();
         SceneManager.LoadScene(GAME);
     }
-    public void LoadGameOver()
+    private void LoadGameOver()
     {
-
         StartCoroutine(WaitForLoad(GAME_OVER, 1));
     }
 
@@ -41,5 +39,10 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         SceneManager.LoadScene(name);
+    }
+
+    public static void GameOver()
+    {
+        instance.LoadGameOver();
     }
 }

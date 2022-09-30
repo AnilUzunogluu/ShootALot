@@ -1,6 +1,7 @@
+using Managers;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
 
     [Header("Shooting")]
@@ -13,48 +14,22 @@ public class AudioManager : MonoBehaviour
     [SerializeField] [Range(0, 1)] private float explosionVolume;
 
 
-    private Vector3 cameraPos;
-
-    private static AudioManager instance;
+    private Vector3 _cameraPos;
 
     private void Awake()
     {
-        ManageSingleton();
-        if (Camera.main != null) cameraPos = Camera.main.transform.position;
-    }
-
-    private void ManageSingleton()
-    {
-        if (instance != null)
-        {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        if (Camera.main != null) _cameraPos = Camera.main.transform.position;
     }
 
 
     public void PlayShootingSound(bool AI)
-    {
-        if (shooting != null && !AI)
-        {
-            AudioSource.PlayClipAtPoint(shooting, cameraPos, playerShootingVolume);
-        }
-        else
-        {
-            AudioSource.PlayClipAtPoint(shooting, cameraPos, AIShootingVolume);
-        }
+    { 
+        AudioSource.PlayClipAtPoint(shooting, _cameraPos, 
+            !AI ? playerShootingVolume : AIShootingVolume);
     }
 
     public void PlayExplosionSound()
     {
-        if (explosion !=null)
-        {
-            AudioSource.PlayClipAtPoint(explosion, cameraPos, explosionVolume);
-        }
+        AudioSource.PlayClipAtPoint(explosion, _cameraPos, explosionVolume);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CameraShake : MonoBehaviour
 {
@@ -8,13 +9,19 @@ public class CameraShake : MonoBehaviour
 
     private Vector3 initialPos;
 
-    private void Start()
+    private void OnEnable()
     {
         initialPos = transform.position;
+        Health.OnPlayerHit += Play;
+    }
+
+    private void OnDisable()
+    {
+        Health.OnPlayerHit -= Play;
     }
 
 
-    public void Play()
+    private void Play(float arg1)
     {
         StartCoroutine(ScreenShake());
     }

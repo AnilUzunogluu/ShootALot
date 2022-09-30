@@ -1,35 +1,16 @@
 using System;
+using Managers;
 using UnityEngine;
 
-public class ScoreKeeper : MonoBehaviour
+public class ScoreKeeper : Singleton<ScoreKeeper>
 {
-    private static ScoreKeeper instance;
     
     private float _score;
-    public float Score => _score;
+    public static float Score => Instance._score;
 
     public event Action OnScore;
 
-    private void Awake()
-    {
-        ManageSingleton();
-    }
-    
-    private void ManageSingleton()
-    {
-        if (instance != null)
-        {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
-    public void ModifyScore(float value)
+    private void UpdateScore(float value)
     {
         _score += value;
         OnScore?.Invoke();
@@ -37,9 +18,19 @@ public class ScoreKeeper : MonoBehaviour
         Debug.Log(_score);
     }
 
-    public void ResetScore()
+    private void SetScore(float value)
     {
-        _score = 0f;
+        _score = value;
         OnScore?.Invoke();
+    }
+
+    public static void ResetScore()
+    { 
+        Instance.SetScore(0);
+    }
+
+    public static void ModifyScore(float value)
+    {
+        Instance.UpdateScore(value);
     }
 }

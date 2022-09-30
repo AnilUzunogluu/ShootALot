@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  scoreValue: 0
   applyCameraShake: 1
 --- !u!114 &8675704852076656209
 MonoBehaviour:
@@ -261,9 +262,8 @@ MonoBehaviour:
   projectile: {fileID: 3610428400163041613, guid: 9252e4364975e134684f15c6989fa289, type: 3}
   projectileSpeed: 10
   projectileLifeTime: 4
-  fireRate: 0.2
+  _fireRate: 1
   useAI: 0
-  isFiring: 0
 --- !u!114 &4348321047090141555
 MonoBehaviour:
   m_ObjectHideFlags: 0
