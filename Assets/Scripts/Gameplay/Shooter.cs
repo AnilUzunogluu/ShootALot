@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,51 +8,52 @@ public class Shooter : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private float projectileLifeTime = 5f;
-    [SerializeField] private float fireRate = 1f;
+    [SerializeField] private float _fireRate = 1f;
     
     [Header("AI")]
     [SerializeField] private bool useAI; 
     private float fireRateAI; 
     
-    [HideInInspector] public bool isFiring;
-
     private Coroutine _firingCoroutine;
+    private bool _firingInProgress;
     private AudioManager _audioManager;
 
-    private void Awake()
-    {
-        _audioManager = FindObjectOfType<AudioManager>();
-    }
 
-    // Start is called before the first frame update
     private void Start()
     {
+        _audioManager = AudioManager.Instance;
+
         if (useAI)
         {
-            isFiring = true;
             fireRateAI = Random.Range(0.9f, 1.5f);
+            Fire(true, fireRateAI);
         }
-    }
-
-    private void Update()
-    {
-     Fire();
-    }
-
-    private void Fire()
-    {
-        if (isFiring && _firingCoroutine == null)
+        else
         {
-            _firingCoroutine = StartCoroutine(FireContinuously());
+            GetComponent<Player>().OnFiringEvent += OnFired; // x => Fire(x, _fireRate);
         }
-        else if (!isFiring && _firingCoroutine != null)
+    }
+
+    private void OnFired(bool isFiring)
+    {
+        Fire(isFiring, _fireRate);
+    }
+    
+    private void Fire(bool isFiring, float fireRate)
+    {
+        if (isFiring && !_firingInProgress)
+        {
+            _firingCoroutine = StartCoroutine(FireContinuously(fireRate));
+            _firingInProgress = true;
+        }
+        else if (!isFiring && _firingInProgress)
         {
             StopCoroutine(_firingCoroutine);
-            _firingCoroutine = null;
+            _firingInProgress = false;
         }
     }
 
-    IEnumerator FireContinuously()
+    IEnumerator FireContinuously(float fireRate)
     {
         do
         {
@@ -61,15 +61,7 @@ public class Shooter : MonoBehaviour
             GameObject instance = Instantiate(projectile, transform.position, Quaternion.identity);
             instance.GetComponent<Rigidbody2D>().velocity = transform.up * projectileSpeed;
             Destroy(instance, projectileLifeTime);
-            if (useAI)
-            {
-                yield return new WaitForSeconds(fireRateAI);
-            }
-            else
-            {
-                yield return new WaitForSeconds(fireRate);
-            }
-            
+            yield return new WaitForSeconds(fireRate);
         } while (true);
     }
 }

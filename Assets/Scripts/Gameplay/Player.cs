@@ -1,11 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     private Vector2 _rawInput;
-    private Vector2 _delta;
-    private Vector2 _newPos;
 
     private Vector2 _minBounds;
     private Vector2 _maxBounds;
@@ -13,6 +12,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed;
 
     private Shooter _shooter;
+    private bool _shooterInitialized;
+
+    public event Action<bool> OnFiringEvent;
 
     #region Paddings
     [Header("Paddings")]
@@ -24,7 +26,13 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        InitializeShooter();
+    }
+
+    private void InitializeShooter()
+    {
         _shooter = GetComponent<Shooter>();
+        _shooterInitialized = true;
     }
 
     private void Start()
@@ -49,33 +57,32 @@ public class Player : MonoBehaviour
     {
         _rawInput = value.Get<Vector2>();
     }
-
     
-
     private void Move()
     {
-        _delta = _rawInput * (moveSpeed * Time.deltaTime);
-        SetNewPos();
-        transform.position = _newPos;
-
+        transform.position = CalculateNewPosition(CalculateDelta());
     }
 
-    private void SetNewPos()
+    private Vector2 CalculateDelta()
+    {
+        return _rawInput * (moveSpeed * Time.deltaTime);
+    }
+
+    private Vector2 CalculateNewPosition(Vector2 delta)
     {
         var position = transform.position;
-        var headedTowardsX = position.x + _delta.x;
-        var headedTowardsY = position.y + _delta.y;
+        var headedTowardsX = position.x + delta.x;
+        var headedTowardsY = position.y + delta.y;
 
-
-        _newPos.x = Mathf.Clamp(headedTowardsX, _minBounds.x + paddingRight, _maxBounds.x - paddingLeft);
-        _newPos.y = Mathf.Clamp(headedTowardsY, _minBounds.y + paddingBottom, _maxBounds.y - paddingTop);
+        return new Vector2(Mathf.Clamp(headedTowardsX, _minBounds.x + paddingRight, _maxBounds.x - paddingLeft), 
+            Mathf.Clamp(headedTowardsY, _minBounds.y + paddingBottom, _maxBounds.y - paddingTop));
     }
 
     void OnFire(InputValue value)
     {
-        if (_shooter != null)
+        if (_shooterInitialized)
         {
-            _shooter.isFiring = value.isPressed;
+            OnFiringEvent?.Invoke(value.isPressed);
         }
     }
     

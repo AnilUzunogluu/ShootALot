@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,37 +8,40 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider healthDisplay;
     [SerializeField] private TextMeshProUGUI scoreText;
 
-    private Health _health;
-    private ScoreKeeper _scoreKeeper;
-
-    private void Awake()
-    {
-        _health = FindObjectOfType<Health>();
-        _scoreKeeper = FindObjectOfType<ScoreKeeper>();
-    }
-
     private void Start()
     {
-        SetMaxHealth();
-        UpdateHealth();
         UpdateScore();
-
-        _health.OnDamage += UpdateHealth;
-        _scoreKeeper.OnScore += UpdateScore;
     }
 
-    private void UpdateHealth()
+    private void OnEnable()
     {
-        healthDisplay.value = _health.GetHealth;
+        Debug.Log("onenable");
+        Health.OnPlayerHealthInitialized += SetMaxHealth;
+        Health.OnPlayerHit += UpdateHealth;
+        ScoreKeeper.Instance.OnScore += UpdateScore;
+    }
+
+    private void OnDisable()
+    {
+        ScoreKeeper.Instance.OnScore -= UpdateScore;
+        Health.OnPlayerHit -= UpdateHealth;
+    }
+
+    private void UpdateHealth(float value)
+    {
+        healthDisplay.value = value;
     }
 
     private void UpdateScore()
     {
-        scoreText.text = _scoreKeeper.Score.ToString("000000000");
+        scoreText.text = ScoreKeeper.Score.ToString("000000000");
     }
 
-    private void SetMaxHealth()
+    private void SetMaxHealth(float value)
     {
-        healthDisplay.maxValue = _health.GetHealth;
+        healthDisplay.maxValue = value;
+        Health.OnPlayerHealthInitialized -= SetMaxHealth;
+        UpdateHealth(value);
+
     }
 }

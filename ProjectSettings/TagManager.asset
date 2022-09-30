@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Projectile
   - Bonus
+  - EnemyBullet
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

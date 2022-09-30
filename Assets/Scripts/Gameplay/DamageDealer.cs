@@ -5,9 +5,22 @@ public class DamageDealer : MonoBehaviour
 
     [SerializeField] private float damage = 10f;
 
-    public float Damage => damage;
+    
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Player") || col.CompareTag("Enemy"))
+        {
+            Health health = col.GetComponent<Health>();
+            health.TakeDamage(damage);
+        }
 
-    public void Hit()
+        if (CompareTag("Projectile") && !col.CompareTag("Projectile"))
+        {
+            Hit();
+        }
+    }
+    
+    private void Hit()
     {
         Destroy(gameObject);
     }

@@ -5,10 +5,13 @@ public class VFX : MonoBehaviour
 {
     [SerializeField] private GameObject ExplosionVFX;
 
-    private void Start()
+    private void OnEnable()
     {
-        var health = FindObjectOfType<Health>();
-        health.OnDestroyed += PlayExplosionVFX;
+        GetComponent<Health>().OnDestroyed += PlayExplosionVFX;
+    }
+    private void OnDisable()
+    {
+        GetComponent<Health>().OnDestroyed -= PlayExplosionVFX;
     }
 
     private void PlayExplosionVFX()
