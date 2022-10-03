@@ -8,9 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<WaveConfigSO> waveConfigs;
     [SerializeField] private float timeBetweenWaves;
 
-    public WaveConfigSO CurrentWave { get; private set; }
-
-    private List<GameObject> _enemies = new();
+    public WaveConfigSO currentWave { get; private set; }
 
     private bool isLooping = true;
     
@@ -21,49 +19,16 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator  SpawnEnemyWaves()
     {
-        do
-        {
             foreach (WaveConfigSO wave in waveConfigs)
             {
-                CurrentWave = wave;
-                for (int i = 0; i < CurrentWave.EnemyCount; i++)
+                currentWave = wave;
+                for (int i = 0; i < currentWave.EnemyCount; i++)
                 {
-                    Instantiate(CurrentWave.GetEnemy(i), CurrentWave.GetFirstWaypoint().position, Quaternion.Euler(0,0,180), transform);
-                    yield return new WaitForSeconds(CurrentWave.GetRandomSpawnDelay());
+                    Instantiate(currentWave.GetEnemy(i), currentWave.GetFirstWaypoint().position, Quaternion.Euler(0,0,180f), transform);
+                    yield return new WaitForSeconds(currentWave.GetRandomSpawnDelay());
                 }
                 yield return new WaitForSeconds(timeBetweenWaves);
             }
-        } while (isLooping);
-       
     }
-
-    // private void GetEnemies()
-    // {
-    //     for (var i = 0; i < currentWave.EnemyCount; i++)
-    //     {
-    //         _enemies.Add(currentWave.GetEnemy(i));
-    //     }
-    // }
-    //
-    // private void ClearEnemies()
-    // {
-    //     _enemies.Clear();
-    // }
-    //
-    // IEnumerator SpawnWaves()
-    // {
-    //     foreach (var wave in waveConfigs)
-    //     {
-    //         if (isWaveEnded)
-    //         {
-    //             currentWave = wave;
-    //             ClearEnemies();
-    //             GetEnemies();
-    //             StartCoroutine(SpawnEnemies());
-    //             isWaveEnded = false;
-    //         }
-    //         yield return new WaitForSeconds(timeBetweenWaves);
-    //     }
-    // }
     
 }

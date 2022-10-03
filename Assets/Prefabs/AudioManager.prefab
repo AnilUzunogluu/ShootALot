@@ -46,10 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooting: {fileID: 8300000, guid: 7220bd823cbd3d24c979604a49dc3fef, type: 3}
-  playerShootingVolume: 0.2
-  AIShootingVolume: 0.05
+  shootingVolume: 0.1
   explosion: {fileID: 8300000, guid: d40b9ad9640933d4cb188de1af434000, type: 3}
   explosionVolume: 0.3
+  MainMenu: {fileID: 8300000, guid: f24e018a90c25d34495699fa804c7861, type: 3}
+  Game: {fileID: 8300000, guid: 51f56569af651da4a971b04109b63294, type: 3}
+  GameOver: {fileID: 8300000, guid: 0e23ac31ed99d8344a5c5ea2e6e52a16, type: 3}
 --- !u!82 &7777138169495894751
 AudioSource:
   m_ObjectHideFlags: 0
@@ -60,7 +62,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 997d92cc0a4d33c4683da917fec51b4d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f24e018a90c25d34495699fa804c7861, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1

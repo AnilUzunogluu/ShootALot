@@ -14,12 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 5758549587251976988, guid: cbb4a17535ed4d442ad9044fb2cccbec, type: 3}
+  - {fileID: 5758549587251976988, guid: 84785027bcca81f4cb882335bc39af0d, type: 3}
   - {fileID: 5758549587251976988, guid: cbb4a17535ed4d442ad9044fb2cccbec, type: 3}
-  - {fileID: 5758549587251976988, guid: cbb4a17535ed4d442ad9044fb2cccbec, type: 3}
-  - {fileID: 5758549587251976988, guid: cbb4a17535ed4d442ad9044fb2cccbec, type: 3}
-  - {fileID: 5758549587251976988, guid: cbb4a17535ed4d442ad9044fb2cccbec, type: 3}
-  moveSpeed: 5
+  moveSpeed: 3
   pathPrefab: {fileID: 623492857261531998, guid: e3c6f89579ba5544ea0ce7b3cde384d3, type: 3}
   spawnDelay: 1
   spawnDelayVariance: 0.6
-  minSpawnDelay: 0.2
+  minSpawnDelay: 0.8

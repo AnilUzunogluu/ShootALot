@@ -11,7 +11,7 @@ namespace Managers
 
         private void OnEnable()
         {
-            if (instance!= null)
+            if (instance != null)
             {
                 Destroy(gameObject);
                 return;
@@ -48,7 +48,7 @@ namespace Managers
         
         private void OnEnable()
         {
-            if (instance!= null)
+            if (instance != null)
             {
                 Destroy(gameObject);
                 return;

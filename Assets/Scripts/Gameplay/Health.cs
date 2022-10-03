@@ -33,18 +33,36 @@ public class Health : MonoBehaviour
     {
         if (health <= 0)
         {
-            OnDestroyed?.Invoke();
-            AudioManager.Instance.PlayExplosionSound();
+            PlayDeathFX(gameObject.tag);
             if (CompareTag("Enemy"))
             {
                 ScoreKeeper.ModifyScore(scoreValue);
+            }
+            else if (CompareTag("Boss"))
+            {
+                ScoreKeeper.ModifyScore(scoreValue);
+                LevelManager.GameOver();
             }
             else
             {
                LevelManager.GameOver();
             }
-            
             Destroy(gameObject);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (!col.CompareTag(gameObject.tag) && col.CompareTag("Enemy"))
+        {
+            PlayDeathFX(gameObject.tag);
+            Destroy(col.gameObject);
+        } 
+    }
+
+    private void PlayDeathFX(string objectTag)
+    {
+        OnDestroyed?.Invoke();
+        AudioManager.Instance.PlayExplosionSound(tag);
     }
 }

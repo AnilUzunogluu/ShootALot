@@ -17,7 +17,7 @@ public class PathFinder : MonoBehaviour
 
     void Start()
     {
-        _waveConfigSo = _enemySpawner.CurrentWave;
+        _waveConfigSo = _enemySpawner.currentWave;
         _waypoints = _waveConfigSo.GetWaypoints();
     }
 
@@ -40,7 +40,14 @@ public class PathFinder : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            if (gameObject.CompareTag("Boss"))
+            {
+                _currentIndex = 1;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -8,9 +8,9 @@ public class DamageDealer : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Player") || col.CompareTag("Enemy"))
+        if (col.CompareTag("Player") || col.CompareTag("Enemy") || col.CompareTag("Boss"))
         {
-            Health health = col.GetComponent<Health>();
+            var health = col.GetComponent<Health>();
             health.TakeDamage(damage);
         }
 
