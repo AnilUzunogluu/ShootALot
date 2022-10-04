@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
+using System.Linq;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private List<WaveConfigSO> waveConfigs;
     [SerializeField] private float timeBetweenWaves;
+    [SerializeField] private int waveLoopsBeforeBoss;
 
     public WaveConfigSO currentWave { get; private set; }
 
@@ -14,21 +15,30 @@ public class EnemySpawner : MonoBehaviour
     
     void Start()
     {
-        StartCoroutine(SpawnEnemyWaves());
+        StartCoroutine(SpawnEnemyWaves(waveLoopsBeforeBoss));
     }
 
-    IEnumerator  SpawnEnemyWaves()
+    IEnumerator  SpawnEnemyWaves(int count)
     {
+        var bossWaveSkipped = 0;
+        for (int i = 0; i < count; i++)
+        {
             foreach (WaveConfigSO wave in waveConfigs)
             {
                 currentWave = wave;
-                for (int i = 0; i < currentWave.EnemyCount; i++)
+                if (bossWaveSkipped < count - 1 && currentWave.name == "Boss")
                 {
-                    Instantiate(currentWave.GetEnemy(i), currentWave.GetFirstWaypoint().position, Quaternion.Euler(0,0,180f), transform);
+                    currentWave = waveConfigs.First();
+                    bossWaveSkipped++;
+                }
+                for (int j = 0; j < currentWave.EnemyCount; j++)
+                {
+                    Instantiate(currentWave.GetEnemy(j), currentWave.GetFirstWaypoint().position, Quaternion.Euler(0,0,180f), transform);
                     yield return new WaitForSeconds(currentWave.GetRandomSpawnDelay());
                 }
                 yield return new WaitForSeconds(timeBetweenWaves);
             }
+        }
     }
     
 }

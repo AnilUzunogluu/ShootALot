@@ -103,8 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52aa51e593a5614ba6b7246550d3e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 150
-  scoreValue: 1000
+  health: 200
+  scoreValue: 2500
   applyCameraShake: 0
 --- !u!114 &102429145
 MonoBehaviour:
@@ -198,5 +198,5 @@ MonoBehaviour:
   projectileLifeTime: 4
   _fireRate: 1
   useAI: 1
-  minFireRate: 1.2
-  maxFireRate: 1.2
+  minFireRate: 0.8
+  maxFireRate: 0.8

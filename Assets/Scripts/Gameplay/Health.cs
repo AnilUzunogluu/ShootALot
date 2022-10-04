@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
     public event Action OnDestroyed;
     public static event Action<float> OnPlayerHit;
     public static event Action<float> OnPlayerHealthInitialized;
-
+    
     private void Start()
     {
         if (applyCameraShake)
@@ -40,11 +40,13 @@ public class Health : MonoBehaviour
             }
             else if (CompareTag("Boss"))
             {
+                LevelManager.Instance.isGameWon = true; 
                 ScoreKeeper.ModifyScore(scoreValue);
                 LevelManager.GameOver();
             }
             else
             {
+                LevelManager.Instance.isGameWon = false;
                LevelManager.GameOver();
             }
             Destroy(gameObject);

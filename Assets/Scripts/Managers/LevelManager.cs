@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     private const string GAME_OVER = "Game Over";
     private const string GAME = "Game";
 
+    public bool isGameWon;
 
     public event Action<string> SwitchGameMusic;
 
