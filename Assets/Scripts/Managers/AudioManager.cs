@@ -31,7 +31,6 @@ public class AudioManager : Managers.Singleton<AudioManager>
     {
         _cameraPos = Camera.main.transform.position;
         LevelManager.Instance.SwitchGameMusic += PlayGameMusic;
-        
     }
 
 

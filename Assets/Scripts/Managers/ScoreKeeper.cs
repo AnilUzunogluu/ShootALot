@@ -15,7 +15,6 @@ public class ScoreKeeper : Singleton<ScoreKeeper>
         _score += value;
         OnScore?.Invoke();
         Mathf.Clamp(_score, 0, float.MaxValue);
-        Debug.Log(_score);
     }
 
     private void SetScore(float value)

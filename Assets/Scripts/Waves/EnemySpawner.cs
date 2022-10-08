@@ -10,8 +10,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int waveLoopsBeforeBoss;
 
     public WaveConfigSO currentWave { get; private set; }
-
-    private bool isLooping = true;
     
     void Start()
     {
