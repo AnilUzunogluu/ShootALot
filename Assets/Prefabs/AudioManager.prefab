@@ -50,9 +50,9 @@ MonoBehaviour:
   explosion: {fileID: 8300000, guid: d40b9ad9640933d4cb188de1af434000, type: 3}
   bossExplosion: {fileID: 8300000, guid: a29ea37ce91850c4daca6fd56e93e0c8, type: 3}
   explosionVolume: 0.3
-  MainMenu: {fileID: 8300000, guid: f24e018a90c25d34495699fa804c7861, type: 3}
-  Game: {fileID: 8300000, guid: 51f56569af651da4a971b04109b63294, type: 3}
-  GameOver: {fileID: 8300000, guid: 0e23ac31ed99d8344a5c5ea2e6e52a16, type: 3}
+  mainMenu: {fileID: 8300000, guid: f24e018a90c25d34495699fa804c7861, type: 3}
+  game: {fileID: 8300000, guid: 51f56569af651da4a971b04109b63294, type: 3}
+  gameOver: {fileID: 8300000, guid: 0e23ac31ed99d8344a5c5ea2e6e52a16, type: 3}
 --- !u!82 &7777138169495894751
 AudioSource:
   m_ObjectHideFlags: 0

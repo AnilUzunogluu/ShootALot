@@ -8,13 +8,13 @@ public class Shooter : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private float projectileLifeTime = 5f;
-    [SerializeField] private float _fireRate = 1f;
+    [SerializeField] private float fireRate = 1f;
     
     [Header("AI")]
     [SerializeField] private bool useAI;
     [SerializeField] private float minFireRate;
     [SerializeField] private float maxFireRate;
-    private float fireRateAI; 
+    private float _fireRateAI; 
     
     
     private Coroutine _firingCoroutine;
@@ -28,12 +28,12 @@ public class Shooter : MonoBehaviour
 
         if (useAI)
         {
-            fireRateAI = Random.Range(minFireRate, maxFireRate);
-            StartCoroutine(FireContinuously(fireRateAI));
+            _fireRateAI = Random.Range(minFireRate, maxFireRate);
+            StartCoroutine(FireContinuously(_fireRateAI));
         }
         else
         {
-            StartCoroutine(FireContinuously(_fireRate)); // x => Fire(x, _fireRate);
+            StartCoroutine(FireContinuously(fireRate)); // x => Fire(x, _fireRate);
         }
     }
     

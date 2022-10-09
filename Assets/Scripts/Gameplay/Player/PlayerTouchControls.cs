@@ -58,11 +58,18 @@ public class PlayerTouchControls : MonoBehaviour
         _worldTouchPosition = _camera.ScreenToWorldPoint(_touchPosition);
         _worldTouchPosition.y += yOffSet;
         
-        _clampedPosition = new Vector3(Mathf.Clamp(_worldTouchPosition.x, _minBounds.x + paddingRight, _maxBounds.x - paddingLeft), 
-            Mathf.Clamp(_worldTouchPosition.y, _minBounds.y + paddingBottom, _maxBounds.y - paddingTop), _worldTouchPosition.z);
+        _clampedPosition = new Vector3(
+            Mathf.Clamp(_worldTouchPosition.x, _minBounds.x + paddingRight, _maxBounds.x - paddingLeft), 
+            Mathf.Clamp(_worldTouchPosition.y, _minBounds.y + paddingBottom, _maxBounds.y - paddingTop),
+            _worldTouchPosition.z);
         
-        transform.position = Vector3.MoveTowards(transform.position, _clampedPosition, moveSpeed * Time.fixedDeltaTime);
+        
+
+        transform.position = Vector2.MoveTowards(transform.position, _clampedPosition, moveSpeed * Time.deltaTime);
+        
+        
     }
+    
     
     private void SetUpBounds()
     {

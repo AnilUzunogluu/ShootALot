@@ -1,17 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonHandler : MonoBehaviour
 {
-    private string buttonName;
+    private string _buttonName;
     private Button _button;
     private void Awake()
     {
-        buttonName = gameObject.name;
+        _buttonName = gameObject.name;
         _button = GetComponent<Button>();
     }
 
@@ -22,7 +18,7 @@ public class ButtonHandler : MonoBehaviour
 
     private void GetClickEvent()
     {
-        switch (buttonName)
+        switch (_buttonName)
         {
             case "Start":
                 _button.onClick.AddListener(LevelManager.Instance.LoadGame);

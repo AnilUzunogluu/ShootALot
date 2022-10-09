@@ -65,6 +65,6 @@ public class Health : MonoBehaviour
     private void PlayDeathFX(string objectTag)
     {
         OnDestroyed?.Invoke();
-        AudioManager.Instance.PlayExplosionSound(tag);
+        AudioManager.Instance.PlayExplosionSound(objectTag);
     }
 }

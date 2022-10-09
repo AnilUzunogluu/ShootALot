@@ -157,7 +157,7 @@ MonoBehaviour:
   projectile: {fileID: 3610428400163041613, guid: 9252e4364975e134684f15c6989fa289, type: 3}
   projectileSpeed: 15
   projectileLifeTime: 4
-  _fireRate: 0.35
+  fireRate: 0.3
   useAI: 0
   minFireRate: 0
   maxFireRate: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9d6649874edde4bbb4119b7733a1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplosionVFX: {fileID: 1587261729604890, guid: 600ec83cba1cec448bf41a6607229741, type: 3}
+  explosionVFX: {fileID: 1587261729604890, guid: 600ec83cba1cec448bf41a6607229741, type: 3}
 --- !u!114 &1246455099130895500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9a8eada49cb6d4e939b294567a4199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 20
   yOffSet: 0.9
   paddingRight: 0.5
   paddingLeft: 0.5

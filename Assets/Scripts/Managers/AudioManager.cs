@@ -13,9 +13,9 @@ public class AudioManager : Managers.Singleton<AudioManager>
     [SerializeField] [Range(0, 1)] private float explosionVolume;
 
     [Header("GameState")] 
-    [SerializeField] private AudioClip MainMenu;
-    [SerializeField] private AudioClip Game;
-    [SerializeField] private AudioClip GameOver;
+    [SerializeField] private AudioClip mainMenu;
+    [SerializeField] private AudioClip game;
+    [SerializeField] private AudioClip gameOver;
 
     private AudioSource _musicPlayer;
 
@@ -47,23 +47,23 @@ public class AudioManager : Managers.Singleton<AudioManager>
         AudioSource.PlayClipAtPoint(objectTag == "Boss" ? bossExplosion : explosion, _cameraPos, explosionVolume);
     }
 
-    private void PlayGameMusic(string name)
+    private void PlayGameMusic(string sceneName)
     {
         if (_musicPlayer == null) return;
-        switch (name)
+        switch (sceneName)
         {
             case "Game":
-                _musicPlayer.clip = Game;
+                _musicPlayer.clip = game;
                 _musicPlayer.Play();
                 break;
             
             case "Game Over":
-                _musicPlayer.clip = GameOver;
+                _musicPlayer.clip = gameOver;
                 _musicPlayer.Play();
                 break;
             
             case "Main Menu":
-                _musicPlayer.clip = MainMenu;
+                _musicPlayer.clip = mainMenu;
                 _musicPlayer.Play();
                 break;
             default:

@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9d6649874edde4bbb4119b7733a1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplosionVFX: {fileID: 1280240331523082, guid: 45ae5851ef2832044bba82850372d67b, type: 3}
+  explosionVFX: {fileID: 1280240331523082, guid: 45ae5851ef2832044bba82850372d67b, type: 3}
 --- !u!50 &4561482716264232106
 Rigidbody2D:
   serializedVersion: 4
@@ -196,7 +196,7 @@ MonoBehaviour:
   projectile: {fileID: 3610428400163041613, guid: ef09ca64e2daf4746b959c495ecb339b, type: 3}
   projectileSpeed: 7
   projectileLifeTime: 4
-  _fireRate: 1
+  fireRate: 1
   useAI: 1
   minFireRate: 1.4
   maxFireRate: 1.7

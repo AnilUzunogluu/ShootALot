@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class VFX : MonoBehaviour
 {
-    [SerializeField] private GameObject ExplosionVFX;
+    [SerializeField] private GameObject explosionVFX;
 
     private void OnEnable()
     {
@@ -16,7 +16,7 @@ public class VFX : MonoBehaviour
 
     private void PlayExplosionVFX()
     {
-       var instance =  Instantiate(ExplosionVFX, transform.position, quaternion.identity);
+       var instance =  Instantiate(explosionVFX, transform.position, quaternion.identity);
        Destroy(instance.gameObject, 3f);
     }
 }
